@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Configuration, OpenAIApi } from "openai";
+import "./App.css";
 
 function App() {
+  const configuration = new Configuration({ apiKey: process.env.OPEN_API_KEY });
+  const openai = new OpenAIApi(configuration);
+  const generateImage = async () => {
+    const res = await openai.createImage({
+      prompt: "Say this is a test",
+      n: 1,
+      size: "1024x1024",
+    });
+    console.log(res);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={generateImage}>Generate an Image</button>
     </div>
   );
 }
