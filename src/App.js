@@ -7,7 +7,7 @@ function App() {
   const [ image, setImage ] = useState("");
 
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: process.env.OPEN_API_KEY,
   });
   const openai = new OpenAIApi(configuration);
   const generateImage = async () => {
